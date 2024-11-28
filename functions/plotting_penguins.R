@@ -40,3 +40,62 @@ plot_boxplot(penguins_clean,
              species, flipper_length_mm, 
              "Species", "Flipper Length (mm)", 
              species_colours)
+
+#Function to save png plots:
+save_flipper_plot_png <- function(boxplot, 
+                                  filename, size, res, scaling){
+  agg_png(filename, width   =  size, 
+          height  =  size, 
+          units   =  "cm", 
+          res     =  res, 
+          scaling =  scaling)
+  print(boxplot)
+  dev.off()
+}
+
+#The png plots we made
+flipper_boxplot <- plot_boxplot(penguins_clean, 
+                                species, flipper_length_mm, 
+                                "Species", "Flipper Length (mm)", 
+                                species_colours)
+
+save_flipper_plot_png(flipper_boxplot, 
+                      here("figures", "flipper_boxplot_report.png"), 
+                      size = 20, res = 300, scaling = 2)
+
+save_flipper_plot_png(flipper_boxplot, 
+                      here("figures", "flipper_boxplot_poster.png"), 
+                      size = 40, res = 300, scaling = 4)
+
+save_flipper_plot_png(flipper_boxplot, 
+                      here("figures", "flipper_boxplot_powerpoint.png"), 
+                      size = 20, res = 300, scaling = 3)
+
+#function to save svg plots
+save_flipper_plot_svg <- function(boxplot, 
+                                  filename, size, scaling){
+  size_inches = size/2.54
+  svglite(filename, width   = size_inches, 
+          height  = size_inches, 
+          scaling = scaling)
+  print(boxplot)
+  dev.off()
+}
+
+#The svg plots we made
+flipper_boxplot <- plot_boxplot(penguins_clean, 
+                                species, flipper_length_mm, 
+                                "Species", "Flipper Length (mm)", 
+                                species_colours)
+
+save_flipper_plot_svg(flipper_boxplot, 
+                      here("figures", "flipper_boxplot_report.svg"), 
+                      size = 20, scaling = 2)
+
+save_flipper_plot_svg(flipper_boxplot, 
+                      here("figures", "flipper_boxplot_poster.svg"), 
+                      size = 40, scaling = 4)
+
+save_flipper_plot_svg(flipper_boxplot, 
+                      here("figures", "flipper_boxplot_powerpoint.svg"), 
+                      size = 20, scaling = 3)
