@@ -160,4 +160,66 @@ combined_plot <- (plot1 | plot2) / (plot3 | plot4)
 combined_plot
 ```
 
-# 
+## Making publication quality figures:
+
+#Making .png figures
+
+```{r}
+library(ragg)
+
+flipper_boxplot_publication <- 
+plot_boxplot(penguins_clean, species, flipper_length_mm, "Species", "Flipper length mm", species_colours)
+
+agg_png("figures/penguin_boxplot_default.png", 
+        width = 20,
+        height = 20,
+        units = "cm",
+        res = 300,
+        scaling = 1)
+
+print(flipper_boxplot_publication)
+dev.off()
+
+agg_png("figures/penguin_boxplot_2.png", 
+        width = 20,
+        height = 20,
+        units = "cm",
+        res = 300,
+        scaling = 2)
+
+print(flipper_boxplot_publication)
+dev.off()
+
+agg_png("figures/penguin_boxplot_lowres.png", 
+        width = 20,
+        height = 20,
+        units = "cm",
+        res = 50,
+        scaling = 1)
+
+print(flipper_boxplot_publication)
+dev.off()
+
+agg_png("figures/penguin_boxplot_poster.png", 
+        width = 40,
+        height = 40,
+        units = "cm",
+        res = 300,
+        scaling = 4)
+
+print(flipper_boxplot_publication)
+dev.off()
+
+agg_png("figures/penguin_boxplot_ppt.png", 
+        width = 20,
+        height = 20,
+        units = "cm",
+        res = 300,
+        scaling = 3)
+
+print(flipper_boxplot_publication)
+dev.off()
+
+#can use scaling to control how big fonts are relative to size of diagram.
+#can adjust width and height to make size bigger (e.g for poster) - remember to change scaling accordingly
+```
