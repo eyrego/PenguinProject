@@ -1,3 +1,23 @@
+## ---------------------------
+##
+## Script name: plotting_penguins.r
+##
+## Purpose of script: 
+##      # Functions for plotting publication quality figures and saving those figures.
+##
+## Author: Dr. Lydia France and Oliver Eyre
+##
+## Date Created: 2024-11-28
+##
+##
+## ---------------------------
+##
+## Notes: A file to go alongside the reproducible figures lessons from MT weeks 
+## 1-4, storing functions to clean up the penguins dataset found in palmerpenguins.
+##   
+##
+## ---------------------------
+
 species_colours <- c("Adelie" = "darkorange", 
                      "Chinstrap" = "purple", 
                      "Gentoo" = "cyan4")
@@ -99,3 +119,5 @@ save_flipper_plot_svg(flipper_boxplot,
 save_flipper_plot_svg(flipper_boxplot, 
                       here("figures", "flipper_boxplot_powerpoint.svg"), 
                       size = 20, scaling = 3)
+
+#We are so done woo
