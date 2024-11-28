@@ -1,18 +1,19 @@
 ## ---------------------------
 ##
-## Script name: Cleaning.r
+## Script name: cleaning_penguins.r
 ##
 ## Purpose of script: 
 ##      # A file of functions for cleaning the Palmer Penguins dataset
 ##
-## Author: Dr. Lydia France
+## Author: Dr. Lydia France and Oliver Eyre
 ##
-## Date Created: 2024-10-01 
+## Date Created: 2024-11-28
 ##
 ##
 ## ---------------------------
 ##
-## Notes:
+## Notes: A file to go alongside the reproducible figures lessons from MT weeks 
+## 1-4, storing functions to clean up the penguins dataset found in palmerpenguins.
 ##   
 ##
 ## ---------------------------
@@ -59,3 +60,4 @@ remove_NA <- function(penguins_data) {
 }
 
 
+#we are so done woo
