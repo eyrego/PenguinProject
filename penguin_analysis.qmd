@@ -82,25 +82,51 @@ head(adelie_body_mass)
 ```
 
 # Renv:
+Should all be typed in console. Commands typed uncoded to ensure code cannot run, using /# #renv::init initialises renv. #renv::snapshot creates or updates the renv.lock file, allowing us to keep a record of all packages installed for this analysis. #renv::diagnostics allows us to run a summary of what packages have been installed by renv. #renv::restore() allows us or someone else to restore the snapshot and ensure the same libraries are installed. #renv::status allows us to check if renv is active. Anything with a :: should be typed in the console according to LF.
 
-should all be typed in console. Here, am using \# to ensure code does not accidentally run. renv::init initialises renv. renv::snapshot creates renv.lock file, allowing us to keep a record of all packages installed for this analysis. renv::diagnostics allows us to run a summary of what packages have been installed by renv. renv::restore() allows us or someone else to restore the snapshot and ensure the same libraries are installed. renv::status allows us to check if renv is active. Anything with a :: should be typed in the console according to LF.
-
-# Part2 
+## Week 4
+# Getting myself set (telling computer where I am and loading ggplot2 package)
 ```{r}
 here::here()
+library(ggplot2)
+```
+# Making an ugly boxplot
 
-#Tells where to find file on my machine. penguins_clean \<- read.csv(here("data", "penguins_clean.csv"))
+```{r}
+names(penguins_clean)
 
-#codes for boxplot flipper_boxplot_old \<- ggplot( data=penguins_clean, aes(x=species, y=flipper_length_mm)) + geom_boxplot()
+penguins_flippers <- penguins_clean %>% 
+  select(species, flipper_length_mm) %>% 
+  drop_na()
 
-#codes boxplot flipper_boxplot_old
+flipper_boxplot_plain <- ggplot(data=penguins_flippers, aes(x=species, y=flipper_length_mm)) + geom_boxplot()
 
-#new dataset to get rid of NA vals only in flipper column (only has flipper length and species). penguins_flippers \<- select(penguins_clean, c("species","flipper_length_mm")) %\>% drop_na() colnames(penguins_flippers) summary(penguins_flippers)
+flipper_boxplot_plain
+```
+# Making nicer figure
+```{r}
+flipper_boxplot_nicer <- ggplot(data = penguins_flippers, aes (x = species, y = flipper_length_mm)) + geom_boxplot(aes(color = species), width = 0.3, show.legend = FALSE) + geom_jitter(aes(color = species), alpha = 0.3, show.legend = FALSE, position = position_jitter(width = 0.2, seed=0)) + labs (x= "Species", y = "Flipper Length (mm)")
 
-#NOTE- she has just taken code from above, called boxplot penguins_flippers and deleted old code. I have kept to show what I have done. species_colours \<- c("Adelie"="darkorange", "Chinstrap"="purple", "Gentoo"="cyan4")
+flipper_boxplot_nicer
+```
 
-flipper_boxplot \<- ggplot( data=penguins_flippers, aes(x=species, y=flipper_length_mm))+ geom_boxplot(), width=0.7, show.legend=FALSE )
+# Adding nice colours
+```{r}
+#defines colour mapping with names for each species
+species_colours <- c("Adelie" = "darkorange", "Chinstrap" = "purple", "Gentoo" = "cyan4")
 
-flipper_boxplot
+flipper_boxplot_colours <- ggplot(data = penguins_flippers, aes (x = species, y = flipper_length_mm)) + geom_boxplot(aes(color = species), width = 0.3, show.legend = FALSE) + geom_jitter(aes(color = species), alpha = 0.3, show.legend = FALSE, position = position_jitter(width = 0.2, seed=0)) + scale_color_manual(values = species_colours) + labs (x= "Species", y = "Flipper Length (mm)") + theme_bw()
 
-species_colours \<- c("Adelie"="darkorange", "Chinstrap"="purple", "Gentoo"="cyan4")
+flipper_boxplot_colours
+#adding theme_bw removes grey background
+```
+
+# Making separate function and using that to plot boxplot...
+```{r}
+source(here("functions", "plotting_penguins.r"))
+
+plot_boxplot(penguins_clean, species, body_mass_g, "Species", "Body mass (g)", species_colours)
+```
+
+# Making subplots
+```{r}
