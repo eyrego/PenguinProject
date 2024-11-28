@@ -1,0 +1,106 @@
+---
+title: "penguin_analysis"
+format: html
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Week 1
+
+# Loading libraries and code files.
+
+```{r}
+library(tidyverse)
+library(palmerpenguins)
+library(janitor)
+library(here)
+
+#source function says to R i want you to find this file and use the stuff within this file to run the code laid out below.
+source(here("functions","cleaning_penguins.r"))
+```
+
+# Preserving Raw Data
+
+```{r}
+write.csv(penguins_raw, here("data","penguins_raw.csv"))
+
+#loading raw data
+penguins_raw<-read.csv(here("data","penguins_raw.csv"))
+```
+
+# Cleaning raw data and generating clean data set.
+```{r}
+#Using functions from functions script (cleaning.R)
+cleaning_penguin_columns <- function(raw_data){
+  print("cleaned names, removed comments, empty rows and columns and delta")
+  raw_data %>% 
+    clean_names() %>% 
+    shorten_species() %>% 
+      remove_empty(c("rows", "cols")) %>% 
+      select(-starts_with("delta")) %>% 
+      select(-comments)}
+      
+#Runs code
+colnames(penguins_raw)
+penguins_clean<-cleaning_penguin_columns(penguins_raw)
+colnames(penguins_clean)
+
+#writes new csv for clean penguins data. 
+write.csv(penguins_clean, here("data","penguins_clean.csv"))
+```
+
+# Removing NA values:
+```{r}
+body_mass <- penguins_clean %>%
+    select(species, body_mass_g) %>%
+    remove_NA()
+
+print(paste("Number of rows:", nrow(body_mass)))
+print(paste("Number of missing values:", sum(is.na(body_mass))))
+```
+
+# Filtering by Species
+```{r}
+adelie_data <- penguins_clean %>%
+  filter(species == "Adelie")
+
+head(adelie_data)
+```
+
+# Combining the above 2:
+```{r}
+
+adelie_body_mass <- penguins_clean %>%
+  filter(species == "Adelie") %>%
+  select(species, body_mass_g) %>%
+  remove_NA()
+
+head(adelie_body_mass)
+```
+
+# Renv:
+
+should all be typed in console. Here, am using \# to ensure code does not accidentally run. renv::init initialises renv. renv::snapshot creates renv.lock file, allowing us to keep a record of all packages installed for this analysis. renv::diagnostics allows us to run a summary of what packages have been installed by renv. renv::restore() allows us or someone else to restore the snapshot and ensure the same libraries are installed. renv::status allows us to check if renv is active. Anything with a :: should be typed in the console according to LF.
+
+# Part2 
+```{r}
+here::here()
+
+#Tells where to find file on my machine. penguins_clean \<- read.csv(here("data", "penguins_clean.csv"))
+
+#codes for boxplot flipper_boxplot_old \<- ggplot( data=penguins_clean, aes(x=species, y=flipper_length_mm)) + geom_boxplot()
+
+#codes boxplot flipper_boxplot_old
+
+#new dataset to get rid of NA vals only in flipper column (only has flipper length and species). penguins_flippers \<- select(penguins_clean, c("species","flipper_length_mm")) %\>% drop_na() colnames(penguins_flippers) summary(penguins_flippers)
+
+#NOTE- she has just taken code from above, called boxplot penguins_flippers and deleted old code. I have kept to show what I have done. species_colours \<- c("Adelie"="darkorange", "Chinstrap"="purple", "Gentoo"="cyan4")
+
+flipper_boxplot \<- ggplot( data=penguins_flippers, aes(x=species, y=flipper_length_mm))+ geom_boxplot(), width=0.7, show.legend=FALSE )
+
+flipper_boxplot
+
+species_colours \<- c("Adelie"="darkorange", "Chinstrap"="purple", "Gentoo"="cyan4")
