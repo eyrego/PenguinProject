@@ -227,3 +227,14 @@ dev.off()
 #Making images using vectors
 ```{r}
 library(svglite)
+
+flipper_boxplot_vector <- plot_boxplot(penguins_clean, species, flipper_length_mm, "Species", "Flipper Length (mm)", species_colours)
+
+inches_conversion = 2.54
+svglite("figures/penguin_boxplot_vector.svg", 
+        width = 20 / inches_conversion, 
+        height = 20 / inches_conversion, 
+        scaling = 2)
+print(flipper_boxplot_vector)
+dev.off()
+```
