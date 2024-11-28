@@ -17,6 +17,10 @@ library(tidyverse)
 library(palmerpenguins)
 library(janitor)
 library(here)
+library(ggplot2)
+library(patchwork)
+library(ragg)
+library(svglite)
 
 #source function says to R i want you to find this file and use the stuff within this file to run the code laid out below.
 source(here("functions","cleaning_penguins.r"))
