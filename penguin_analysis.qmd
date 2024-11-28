@@ -167,7 +167,7 @@ combined_plot
 ```{r}
 library(ragg)
 
-flipper_boxplot_publication <- 
+flipper_boxplot_png <- 
 plot_boxplot(penguins_clean, species, flipper_length_mm, "Species", "Flipper length mm", species_colours)
 
 agg_png("figures/penguin_boxplot_default.png", 
@@ -177,7 +177,7 @@ agg_png("figures/penguin_boxplot_default.png",
         res = 300,
         scaling = 1)
 
-print(flipper_boxplot_publication)
+print(flipper_boxplot_png)
 dev.off()
 
 agg_png("figures/penguin_boxplot_2.png", 
@@ -187,7 +187,7 @@ agg_png("figures/penguin_boxplot_2.png",
         res = 300,
         scaling = 2)
 
-print(flipper_boxplot_publication)
+print(flipper_boxplot_png)
 dev.off()
 
 agg_png("figures/penguin_boxplot_lowres.png", 
@@ -197,7 +197,7 @@ agg_png("figures/penguin_boxplot_lowres.png",
         res = 50,
         scaling = 1)
 
-print(flipper_boxplot_publication)
+print(flipper_boxplot_png)
 dev.off()
 
 agg_png("figures/penguin_boxplot_poster.png", 
@@ -207,7 +207,7 @@ agg_png("figures/penguin_boxplot_poster.png",
         res = 300,
         scaling = 4)
 
-print(flipper_boxplot_publication)
+print(flipper_boxplot_png)
 dev.off()
 
 agg_png("figures/penguin_boxplot_ppt.png", 
@@ -217,9 +217,13 @@ agg_png("figures/penguin_boxplot_ppt.png",
         res = 300,
         scaling = 3)
 
-print(flipper_boxplot_publication)
+print(flipper_boxplot_png)
 dev.off()
 
 #can use scaling to control how big fonts are relative to size of diagram.
 #can adjust width and height to make size bigger (e.g for poster) - remember to change scaling accordingly
 ```
+
+#Making images using vectors
+```{r}
+library(svglite)
