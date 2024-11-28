@@ -130,3 +130,34 @@ plot_boxplot(penguins_clean, species, body_mass_g, "Species", "Body mass (g)", s
 
 # Making subplots
 ```{r}
+library(patchwork)
+
+#Creating different subplots with different y-axis columns
+plot1 <- plot_boxplot(
+    penguins_clean, species, flipper_length_mm, 
+    "Penguin Species", "Flipper Length (mm)", 
+    species_colours)
+
+plot2 <- plot_boxplot(
+    penguins_clean, species, culmen_length_mm, 
+    "Penguin Species", "Bill Length (mm)", 
+    species_colours)
+
+plot3 <- plot_boxplot(
+    penguins_clean, species, culmen_depth_mm, 
+    "Penguin Species", "Bill Depth (mm)", 
+    species_colours)
+
+plot4 <- plot_boxplot(
+    penguins_clean, species, body_mass_g, 
+    "Penguin Species", "Body Mass (g)", 
+    species_colours)
+
+# Combine plots in a 2x2 grid
+
+combined_plot <- (plot1 | plot2) / (plot3 | plot4)
+
+combined_plot
+```
+
+# 
