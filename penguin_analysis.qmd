@@ -238,3 +238,5 @@ svglite("figures/penguin_boxplot_vector.svg",
 print(flipper_boxplot_vector)
 dev.off()
 ```
+
+Lesson over yippee
