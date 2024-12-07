@@ -24,6 +24,7 @@ library(svglite)
 
 #source function says to R i want you to find this file and use the stuff within this file to run the code laid out below.
 source(here("functions","cleaning_penguins.r"))
+source(here("functions","plotting_penguins.r"))
 ```
 
 # Preserving Raw Data
