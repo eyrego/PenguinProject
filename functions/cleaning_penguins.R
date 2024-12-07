@@ -5,15 +5,15 @@
 ## Purpose of script: 
 ##      # A file of functions for cleaning the Palmer Penguins dataset
 ##
-## Author: Dr. Lydia France and Oliver Eyre
+## Author: Dr. Lydia France
 ##
-## Date Created: 2024-11-28
+## Date Created: 2024-10-01
 ##
 ##
 ## ---------------------------
 ##
-## Notes: A file to go alongside the reproducible figures lessons from MT weeks 
-## 1-4, storing functions to clean up the penguins dataset found in palmerpenguins.
+## Notes: (Added by Oliver Eyre, 2024) A file to go alongside the reproducible figures lessons from MT weeks 
+## 1-4, storing functions to clean up the Palmer Penguins dataset.
 ##   
 ##
 ## ---------------------------
@@ -58,6 +58,3 @@ remove_NA <- function(penguins_data) {
   penguins_data %>%
     na.omit()
 }
-
-
-#we are so done woo
